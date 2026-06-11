@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sampson Destiny Football Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.12.1/html2pdf.bundle.min.js" integrity="sha512-D25Z8/1q2z65ZpJ3NzY6XiPZfwjhbv34OTQHDIZd+KPK+uWCovGt+fMkSzW8ArzCMFUgZt6Cdu7qoXNuy6a2GA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body data-theme="dark">
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" onclick="app.goHome()">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/>
+                        <path d="M2 12h20"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-primary">SAMPSON</span>
+                    <span class="logo-secondary">DESTINY</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#" class="nav-link" onclick="app.goHome()">Home</a>
+                <a href="#" class="nav-link" onclick="app.showDashboard()">Dashboard</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" class="mobile-link" onclick="app.goHome(); app.closeMobileMenu()">Home</a>
+        <a href="#" class="mobile-link" onclick="app.showDashboard(); app.closeMobileMenu()">Dashboard</a>
+        <button class="mobile-theme-toggle" onclick="app.toggleTheme()">Toggle Theme</button>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Processing...</p>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="appContainer">
+        <!-- ==================== LANDING PAGE ==================== -->
+        <section class="page" id="landingPage">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-bg">
+                    <div class="hero-gradient"></div>
+                    <div class="hero-pattern"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>International Football Agency</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="title-line">Building Professional</span>
+                        <span class="title-line highlight">Football Careers</span>
+                        <span class="title-line">Worldwide</span>
+                    </h1>
+                    <p class="hero-description">
+                        Premier representation and intermediary services for professional footballers and clubs. 
+                        We connect talent with opportunity through legally robust, FIFA-compliant agreements.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Players Represented</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">35+</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">€2.4B</span>
+                            <span class="stat-label">Transfer Value</span>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary btn-lg" onclick="app.showAgreementSelection()">
+                            <span>Start Agreement</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-outline btn-lg" onclick="app.showDashboard()">
+                            <span>My Dashboard</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-scroll-indicator">
+                    <div class="scroll-mouse">
+                        <div class="scroll-wheel"></div>
+                    </div>
+                    <span>Scroll to explore</span>
+                </div>
+            </section>
+
+            <!-- Agreement Cards Section -->
+            <section class="agreements-section">
+                <div class="section-header">
+                    <span class="section-tag">Legal Services</span>
+                    <h2 class="section-title">Choose Your Agreement</h2>
+                    <p class="section-subtitle">Select the agreement type that best suits your professional needs</p>
+                </div>
+                <div class="agreements-grid">
+                    <!-- Card 1 -->
+                    <div class="agreement-card" onclick="app.startAgreement('commission')">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5"/>
+                                    <path d="M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">Football Intermediary & Commission Agreement</h3>
+                            <p class="card-description">
+                                Standard commission-based intermediary agreement for player transfers and club negotiations. 
+                                Includes 3% commission on transfer fees and annual salary arrangements.
+                            </p>
+                            <div class="card-features">
+                                <span class="feature-tag">Transfer Negotiation</span>
+                                <span class="feature-tag">3% Commission</span>
+                                <span class="feature-tag">FIFA Compliant</span>
+                            </div>
+                            <button class="btn btn-card">
+                                <span>Start Agreement</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="agreement-card featured" onclick="app.startAgreement('representation')">
+                        <div class="card-glow"></div>
+                        <div class="featured-badge">Most Popular</div>
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                    <path d="M16 3.13a4 4 0 010 7.75"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">Exclusive Player Representation & Career Management Agreement</h3>
+                            <p class="card-description">
+                                Comprehensive exclusive representation for professional footballers. 
+                                Full career management, contract negotiation, and brand development services.
+                            </p>
+                            <div class="card-features">
+                                <span class="feature-tag">Exclusive</span>
+                                <span class="feature-tag">Career Management</span>
+                                <span class="feature-tag">Full Service</span>
+                            </div>
+                            <button class="btn btn-card">
+                                <span>Start Agreement</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="section-header centered">
+                    <span class="section-tag">Why Choose Us</span>
+                    <h2 class="section-title">The Sampson Destiny Advantage</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h4>FIFA Compliant</h4>
+                        <p>All agreements adhere to FIFA regulations and international football standards.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0110 0v4"/>
+                            </svg>
+                        </div>
+                        <h4>Secure & Confidential</h4>
+                        <p>Bank-grade encryption and strict confidentiality protocols protect your data.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                            </svg>
+                        </div>
+                        <h4>Instant PDF Generation</h4>
+                        <p>Generate legally formatted PDF agreements instantly, ready for signing.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h4>24/7 Support</h4>
+                        <p>Round-the-clock legal and administrative support for all clients.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <span>SAMPSON</span>
+                            <span>DESTINY</span>
+                        </div>
+                        <p>Building Professional Football Careers Worldwide</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-col">
+                            <h5>Services</h5>
+                            <a href="#" onclick="app.startAgreement('commission')">Commission Agreement</a>
+                            <a href="#" onclick="app.startAgreement('representation')">Representation Agreement</a>
+                        </div>
+                        <div class="footer-col">
+                            <h5>Legal</h5>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Sampson Destiny Football Agency. All rights reserved.</p>
+                </div>
+            </footer>
+        </section>
+
+        <!-- ==================== AGREEMENT SELECTION PAGE ==================== -->
+        <section class="page hidden" id="selectionPage">
+            <div class="page-header">
+                <div class="page-header-content">
+                    <button class="btn-back" onclick="app.goHome()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        <span>Back to Home</span>
+                    </button>
+                    <h1>Select Agreement Type</h1>
+                    <p>Choose the agreement that aligns with your professional objectives</p>
+                </div>
+            </div>
+            <div class="selection-container">
+                <div class="selection-grid">
+                    <div class="selection-card" onclick="app.startAgreement('commission')">
+                        <div class="selection-number">01</div>
+                        <div class="selection-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Football Intermediary & Commission Agreement</h3>
+                        <p>Commission-based intermediary services for player transfers and club negotiations. Standard 3% commission structure on transfer fees and salary packages.</p>
+                        <div class="selection-meta">
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                ~10 min
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                                6 Sections
+                            </span>
+                        </div>
+                        <button class="btn btn-primary">Start Agreement</button>
+                    </div>
+                    <div class="selection-card featured" onclick="app.startAgreement('representation')">
+                        <div class="selection-number">02</div>
+                        <div class="selection-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <h3>Exclusive Player Representation & Career Management Agreement</h3>
+                        <p>Comprehensive exclusive representation covering career management, contract negotiation, brand development, and full administrative support.</p>
+                        <div class="selection-meta">
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                ~15 min
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                                8 Sections
+                            </span>
+                        </div>
+                        <button class="btn btn-primary">Start Agreement</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MULTI-STEP FORM ==================== -->
+        <section class="page hidden" id="formPage">
+            <div class="form-page-layout">
+                <!-- Sidebar Progress -->
+                <aside class="form-sidebar">
+                    <button class="btn-back sidebar-back" onclick="app.showAgreementSelection()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                    <div class="form-sidebar-header">
+                        <h3 id="formSidebarTitle">Agreement Form</h3>
+                        <p id="formSidebarSubtitle">Complete all steps</p>
+                    </div>
+                    <div class="progress-tracker" id="progressTracker"></div>
+                    <div class="form-sidebar-footer">
+                        <div class="save-indicator" id="saveIndicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                                <path d="M17 21v-8H7v8"/>
+                            </svg>
+                            <span>Auto-saved</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Form Content -->
+                <div class="form-main">
+                    <div class="form-header-mobile">
+                        <button class="btn-back" onclick="app.showAgreementSelection()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <div class="mobile-progress" id="mobileProgress"></div>
+                    </div>
+
+                    <div class="form-container">
+                        <form id="agreementForm" onsubmit="event.preventDefault()">
+                            <!-- Dynamic form steps injected here -->
+                            <div id="formStepsContainer"></div>
+                        </form>
+
+                        <!-- Navigation Buttons -->
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost" id="prevBtn" onclick="app.prevStep()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                <span>Previous</span>
+                            </button>
+                            <div class="form-nav-spacer"></div>
+                            <button type="button" class="btn btn-primary" id="nextBtn" onclick="app.nextStep()">
+                                <span id="nextBtnText">Next Step</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SIGNATURE PAGE ==================== -->
+        <section class="page hidden" id="signaturePage">
+            <div class="signature-layout">
+                <div class="signature-header">
+                    <button class="btn-back" onclick="app.goToForm()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        <span>Back to Form</span>
+                    </button>
+                    <h1>Digital Signature</h1>
+                    <p>Sign below to authenticate your agreement</p>
+                </div>
+                <div class="signature-container">
+                    <div class="signature-box">
+                        <div class="signature-label">
+                            <span id="signatureLabelText">Player Signature</span>
+                            <span class="signature-required">Required</span>
+                        </div>
+                        <div class="signature-canvas-wrapper">
+                            <canvas id="signatureCanvas" width="800" height="300"></canvas>
+                            <div class="signature-placeholder" id="signaturePlaceholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 17h18M7 12h.01M11 12h.01M15 12h.01M19 12h.01M12 7h.01"/>
+                                </svg>
+                                <span>Draw your signature here</span>
+                            </div>
+                        </div>
+                        <div class="signature-actions">
+                            <button type="button" class="btn btn-ghost" onclick="app.clearSignature()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                                </svg>
+                                Clear
+                            </button>
+                            <div class="signature-hint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 16v-4M12 8h.01"/>
+                                </svg>
+                                Use mouse or touch to draw
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signature-preview" id="signaturePreviewBox" style="display:none;">
+                        <div class="signature-label">Signature Preview</div>
+                        <img id="signaturePreviewImg" alt="Signature Preview">
+                    </div>
+                </div>
+                <div class="signature-footer">
+                    <button type="button" class="btn btn-primary btn-lg" id="signatureContinueBtn" onclick="app.completeSignature()" disabled>
+                        <span>Continue to Preview</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== AGREEMENT PREVIEW ==================== -->
+        <section class="page hidden" id="previewPage">
+            <div class="preview-layout">
+                <div class="preview-header">
+                    <button class="btn-back" onclick="app.goToSignature()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        <span>Back to Signature</span>
+                    </button>
+                    <h1>Agreement Preview</h1>
+                    <p>Review your agreement before finalizing</p>
+                </div>
+                <div class="preview-container">
+                    <div class="preview-document" id="previewDocument"></div>
+                </div>
+                <div class="preview-footer">
+                    <button type="button" class="btn btn-ghost" onclick="app.goToSignature()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Edit Agreement
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg" onclick="app.finalizeAgreement()">
+                        <span>Finalize & Download PDF</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DASHBOARD ==================== -->
+        <section class="page hidden" id="dashboardPage">
+            <div class="dashboard-layout">
+                <div class="dashboard-header">
+                    <div class="dashboard-header-content">
+                        <h1>My Dashboard</h1>
+                        <p>Manage your agreements and drafts</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="app.showAgreementSelection()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                        New Agreement
+                    </button>
+                </div>
+
+                <div class="dashboard-tabs">
+                    <button class="dashboard-tab active" data-tab="drafts" onclick="app.switchDashboardTab('drafts')">
+                        <span>Drafts</span>
+                        <span class="tab-count" id="draftsCount">0</span>
+                    </button>
+                    <button class="dashboard-tab" data-tab="completed" onclick="app.switchDashboardTab('completed')">
+                        <span>Completed</span>
+                        <span class="tab-count" id="completedCount">0</span>
+                    </button>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-tab-content active" id="draftsTab">
+                        <div class="agreements-list" id="draftsList"></div>
+                        <div class="empty-state" id="draftsEmpty">
+                            <div class="empty-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                    <path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/>
+                                </svg>
+                            </div>
+                            <h3>No Drafts</h3>
+                            <p>Start a new agreement to see your drafts here.</p>
+                            <button class="btn btn-primary" onclick="app.showAgreementSelection()">Start Agreement</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-tab-content" id="completedTab">
+                        <div class="agreements-list" id="completedList"></div>
+                        <div class="empty-state" id="completedEmpty">
+                            <div class="empty-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <path d="M22 4L12 14.01l-3-3"/>
+                                </svg>
+                            </div>
+                            <h3>No Completed Agreements</h3>
+                            <p>Complete an agreement to see it here.</p>
+                            <button class="btn btn-primary" onclick="app.showAgreementSelection()">Start Agreement</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>'''
